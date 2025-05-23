@@ -33,19 +33,19 @@ function doingTable(change) {
   const row = tbody.querySelector('tr');
   const column = tbody.querySelectorAll('tr');
 
-  if (change === 'appendRow') {
+  if (change === 'appendRow' && rowsCount < 10) {
     tbody.prepend(row.cloneNode(true));
     rowsCount++;
     setCount();
   }
 
-  if (change === 'removeRow') {
+  if (change === 'removeRow' && rowsCount > 2) {
     row.remove();
     rowsCount--;
     setCount();
   }
 
-  if (change === 'appendColumn') {
+  if (change === 'appendColumn' && columnsCount < 10) {
     column.forEach((tr, index) => {
       tr.prepend(tr.firstElementChild.cloneNode(true));
     });
@@ -53,7 +53,7 @@ function doingTable(change) {
     setCount();
   }
 
-  if (change === 'removeColumn') {
+  if (change === 'removeColumn' && columnsCount > 2) {
     column.forEach((tr, index) => {
       tr.firstElementChild.remove();
     });
