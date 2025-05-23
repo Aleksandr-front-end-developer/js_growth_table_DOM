@@ -30,11 +30,12 @@ function handleClick(e) {
 }
 
 function doingTable(change) {
-  const row = tbody.querySelector('tr');
+  const rowAll = tbody.querySelectorAll('tr');
+  const row = rowAll[rowAll.length - 1];
   const column = tbody.querySelectorAll('tr');
 
   if (change === 'appendRow' && rowsCount < 10) {
-    tbody.prepend(row.cloneNode(true));
+    tbody.append(row.cloneNode(true));
     rowsCount++;
     setCount();
   }
@@ -47,7 +48,7 @@ function doingTable(change) {
 
   if (change === 'appendColumn' && columnsCount < 10) {
     column.forEach((tr, index) => {
-      tr.prepend(tr.firstElementChild.cloneNode(true));
+      tr.append(tr.lastElementChild.cloneNode(true));
     });
     columnsCount++;
     setCount();
@@ -55,7 +56,7 @@ function doingTable(change) {
 
   if (change === 'removeColumn' && columnsCount > 2) {
     column.forEach((tr, index) => {
-      tr.firstElementChild.remove();
+      tr.lastElementChild.remove();
     });
     columnsCount--;
     setCount();
